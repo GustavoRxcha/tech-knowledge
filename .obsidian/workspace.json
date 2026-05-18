@@ -1,0 +1,218 @@
+{
+  "main": {
+    "id": "752cda6ddc4f7998",
+    "type": "split",
+    "children": [
+      {
+        "id": "38d47f61551c7a8a",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "e365208e8a100399",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "Nova aba"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "4a96c1db917a90b7",
+    "type": "split",
+    "children": [
+      {
+        "id": "0dde7fc740f4855c",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "eb7b8923d6a826f7",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Explorador de arquivos"
+            }
+          },
+          {
+            "id": "9fee99c8fb6e5f34",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Procurar"
+            }
+          },
+          {
+            "id": "52313f7330c0a34b",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Marcadores"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "a440fa69967f72aa",
+    "type": "split",
+    "children": [
+      {
+        "id": "34b91ddad928c6d8",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "1000a208839dd878",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Links inversos"
+            }
+          },
+          {
+            "id": "44399a54b95920a2",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Links de saída"
+            }
+          },
+          {
+            "id": "3a0d30659cc49121",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Etiquetas"
+            }
+          },
+          {
+            "id": "64596d6c89a9f7fe",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "Todas as propriedades"
+            }
+          },
+          {
+            "id": "4a12dc1fd317a3af",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Sumário"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Abrir a troca rápida": false,
+      "graph:Abrir visualização em gráfico": false,
+      "canvas:Criar novo canvas": false,
+      "daily-notes:Abrir a nota de hoje": false,
+      "templates:Inserir modelo": false,
+      "command-palette:Abrir paleta de comandos": false,
+      "bases:Criar nova base": false
+    }
+  },
+  "active": "e365208e8a100399",
+  "lastOpenFiles": [
+    "wiki/entities/aws.md",
+    "wiki/entities/amazon-dynamodb.md",
+    "wiki/entities/amazon-ec2.md",
+    "wiki/entities/aws-lambda.md",
+    "wiki/concepts/iam-group.md",
+    "wiki/sources/aws-course-04-iam-groups.md",
+    "raw/aula-04-grupos-usuarios-iam.md",
+    "raw/aula-04-grupos-usuarios-iam.md.crdownload",
+    "wiki/overview.md.tmp.6296.e31e88bda475",
+    "wiki/topics/aws-security.md",
+    "wiki/topics/aws-security.md.tmp.6296.4d726377b60e",
+    "wiki/concepts/resource-tags.md",
+    "wiki/concepts/arn.md",
+    "wiki/concepts/principle-of-least-privilege.md",
+    "wiki/concepts/access-keys.md",
+    "wiki/concepts/inline-policy.md",
+    "wiki/concepts/iam-policy.md",
+    "wiki/concepts/mfa.md",
+    "CLAUDE.md.tmp.6296.756818e3f5da",
+    "topics/aws-security.md",
+    "topics",
+    "concepts/resource-tags.md",
+    "concepts/arn.md",
+    "concepts/arn.md.tmp.6296.12f2d2e3b931",
+    "concepts/principle-of-least-privilege.md",
+    "concepts/principle-of-least-privilege.md.tmp.6296.819542291d16",
+    "concepts/access-keys.md",
+    "concepts/access-keys.md.tmp.6296.6ae020608b98",
+    "concepts/inline-policy.md",
+    "concepts/iam-policy.md",
+    "concepts/mfa.md",
+    "concepts",
+    "wiki/entities/google-authenticator.md",
+    "wiki/entities/amazon-s3.md",
+    "wiki/entities/aws-iam.md",
+    "wiki/entities/aws-iam.md.tmp.6296.a20a5b704dd4"
+  ]
+}
