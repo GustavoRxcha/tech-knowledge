@@ -4,17 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "38d47f61551c7a8a",
+        "id": "31e9e48e3c3bb507",
         "type": "tabs",
         "children": [
           {
-            "id": "e365208e8a100399",
+            "id": "86117b7c6b8476a1",
             "type": "leaf",
             "state": {
-              "type": "empty",
+              "type": "graph",
               "state": {},
-              "icon": "lucide-file",
-              "title": "Nova aba"
+              "icon": "lucide-git-fork",
+              "title": "Visualização em gráfico"
             }
           }
         ]
@@ -176,8 +176,10 @@
       "bases:Criar nova base": false
     }
   },
-  "active": "e365208e8a100399",
+  "active": "86117b7c6b8476a1",
   "lastOpenFiles": [
+    "Sem título.canvas",
+    "wiki/entities/aws-iam.md",
     "wiki/entities/aws.md",
     "wiki/entities/amazon-dynamodb.md",
     "wiki/entities/amazon-ec2.md",
@@ -211,8 +213,6 @@
     "concepts/mfa.md",
     "concepts",
     "wiki/entities/google-authenticator.md",
-    "wiki/entities/amazon-s3.md",
-    "wiki/entities/aws-iam.md",
     "wiki/entities/aws-iam.md.tmp.6296.a20a5b704dd4"
   ]
 }
