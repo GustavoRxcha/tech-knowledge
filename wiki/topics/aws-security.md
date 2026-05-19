@@ -1,19 +1,19 @@
 ---
 title: "Segurança AWS"
 type: topic
-tags: [aws, segurança, iam, mfa, s3, roles]
+tags: [aws, segurança, iam, mfa, s3, roles, cognito]
 created: 2026-05-18
-updated: 2026-05-18
-sources: 6
+updated: 2026-05-19
+sources: 11
 ---
 
 # Segurança AWS
 
-Página de tópico agrupando tudo o que o wiki sabe sobre proteger uma conta [[entities/aws|AWS]]. Cobre o módulo completo de IAM (aulas 01–06): bootstrap de conta, gerenciamento de acesso, roles e segurança básica do S3.
+Página de tópico agrupando tudo o que o wiki sabe sobre proteger uma conta [[entities/aws|AWS]]. Cobre o módulo completo de IAM (aulas 01–06) e a camada de autenticação de usuário final via [[entities/aws-cognito|Cognito]] introduzida no módulo serverless.
 
 ---
 
-## Checklist baseline (módulo IAM completo)
+## Checklist baseline (consolidado)
 
 ### Conta e root
 - [x] Ativar [[concepts/mfa|MFA]] no usuário root imediatamente após criar a conta
@@ -30,33 +30,46 @@ Página de tópico agrupando tudo o que o wiki sabe sobre proteger uma conta [[e
 - [x] Aplicar sempre o [[concepts/principle-of-least-privilege|princípio do menor privilégio]]
 - [x] Preferir managed policies da AWS; criar [[concepts/customer-managed-policy|customer-managed]] só quando necessário
 - [x] [[concepts/inline-policy|Inline policies]] apenas para exceções únicas — nunca como padrão
-- [x] Validar permissões após cada configuração (login de teste)
+- [x] Validar permissões após cada configuração (login de teste, erros reais como `User is not authorized to perform: dynamodb:PutItem`)
 - [x] Reservar `AdministratorAccess` para administradores reais
 
 ### Roles e serviços
 - [x] Usar [[concepts/iam-role|roles]] para comunicação entre serviços AWS — **nunca hardcodar credenciais**
+- [x] Cada Lambda tem uma execution role com as policies mínimas para o que faz
 - [x] Nomear roles de forma descritiva: `role-[serviço]-[função]`
 - [x] Revisar policies das roles periodicamente
 
 ### Organização e governança
 - [x] Taguear recursos desde o dia 1 — ver [[concepts/resource-tags]]
+- [x] Todos os serviços de uma solução na **mesma região**
 
 ### S3
 - [x] Habilitar [[concepts/s3-block-public-access|Block Public Access]] em todos os buckets por padrão
 - [x] Acesso público deve ser decisão deliberada e documentada
 - [x] Usar bucket policies + IAM policies para controle granular
 
+### Autenticação de usuários finais
+- [x] Usar [[entities/aws-cognito|Cognito]] para auth de usuários da aplicação (não IAM)
+- [x] Configurar MFA opcional ou obrigatório no User Pool conforme o perfil
+- [x] No [[entities/amazon-api-gateway|API Gateway]], usar authorizer que valida [[concepts/jwt|JWT]] do Cognito **antes** de chegar à Lambda
+- [x] Tokens de curta duração + refresh token
+
 ---
 
 ## Sub-áreas
 
-### Identidade & acesso
+### Identidade & acesso (operacional — IAM)
 - [[entities/aws-iam]]
 - [[concepts/iam-group]]
 - [[concepts/iam-role]]
 - [[concepts/iam-policy]] / [[concepts/inline-policy]] / [[concepts/customer-managed-policy]]
 - [[concepts/access-keys]]
 - [[concepts/principle-of-least-privilege]]
+
+### Identidade de usuário final
+- [[entities/aws-cognito]]
+- [[concepts/user-pool]]
+- [[concepts/jwt]]
 
 ### Autenticação
 - [[concepts/mfa]]
@@ -76,9 +89,11 @@ Página de tópico agrupando tudo o que o wiki sabe sobre proteger uma conta [[e
 
 - SCPs (Service Control Policies), AWS Organizations — sem cobertura
 - KMS, Secrets Manager, GuardDuty, CloudTrail, Security Hub, IAM Access Analyzer — sem cobertura
-- Resource-based policies (bucket policies do S3) — sem cobertura
+- Bucket policies (resource-based) — sem cobertura
 - Tag-based conditions em policies (`aws:ResourceTag`) — sem cobertura
 - Cross-account roles e identidade federada — citados, não detalhados
+- Identity Pool (Cognito) — só User Pool coberto
+- Authorizers do API Gateway na prática — ainda não implementados no curso
 
 ---
 
@@ -90,3 +105,8 @@ Página de tópico agrupando tudo o que o wiki sabe sobre proteger uma conta [[e
 - [[sources/aws-course-04-iam-groups]]
 - [[sources/aws-course-05-iam-roles-custom-policies-lambda]]
 - [[sources/aws-course-06-iam-permissions-validation-s3]]
+- [[sources/aws-course-cognito-intro]]
+- [[sources/aws-course-dynamo-01-table-lambda-intro]]
+- [[sources/aws-course-dynamo-02-lambda-crud]]
+- [[sources/aws-course-apigateway-01-api-routes]]
+- [[sources/aws-course-apigateway-02-integration-postman]]
