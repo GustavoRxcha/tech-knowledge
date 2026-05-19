@@ -4,7 +4,7 @@ type: entity
 tags: [aws, iam, segurança, identidade, controle-de-acesso]
 created: 2026-05-18
 updated: 2026-05-18
-sources: 4
+sources: 6
 ---
 
 # AWS IAM — Identity and Access Management
@@ -19,7 +19,7 @@ Serviço da [[aws|AWS]] para gerenciar identidades e permissões de acesso com g
 |---|---|
 | **User** | Identidade de longa duração para uma pessoa ou aplicação |
 | **Group** | Coleção de usuários compartilhando permissões — ver [[iam-group]] |
-| **Role** | Identidade assumível (ainda não coberta nas fontes atuais) |
+| **Role** | Identidade assumível temporariamente por serviços, contas externas ou identidades federadas — ver [[concepts/iam-role]] |
 | **Policy** | Documento JSON que concede ou nega ações sobre recursos — ver [[iam-policy]] |
 
 ## Caminhos para anexar permissões
@@ -54,18 +54,42 @@ Um usuário pode ter uma, ambas ou nenhuma.
 
 Ver [[iam-policy]] para estrutura e exemplos.
 
+## Tipos de policy
+
+| Tipo | Criada por | Reutilizável | Quando usar |
+|---|---|---|---|
+| Managed (AWS) | AWS | Sim | Casos de uso padrão |
+| [[concepts/customer-managed-policy\|Customer-managed]] | Você | Sim | Permissões específicas do negócio |
+| [[concepts/inline-policy\|Inline]] | Você | Não (1:1) | Exceções pontuais |
+
+## Encerramento do módulo IAM (aula 06)
+
+Boas práticas consolidadas:
+- MFA no root desde o início
+- Nunca usar root para operações diárias
+- Usuários em grupos com políticas bem definidas
+- [[concepts/iam-role|Roles]] para comunicação entre serviços (nunca hardcodar credenciais)
+- [[concepts/resource-tags|Tags]] para organizar recursos
+- Download do CSV de credenciais imediatamente após criar usuários
+
 ## Fontes
 
-- [[aws-course-01-mfa-iam-setup]]
-- [[aws-course-02-iam-policies-tags-credentials]]
-- [[aws-course-03-iam-user-login-inline-policy]]
-- [[aws-course-04-iam-groups]]
+- [[sources/aws-course-01-mfa-iam-setup]]
+- [[sources/aws-course-02-iam-policies-tags-credentials]]
+- [[sources/aws-course-03-iam-user-login-inline-policy]]
+- [[sources/aws-course-04-iam-groups]]
+- [[sources/aws-course-05-iam-roles-custom-policies-lambda]]
+- [[sources/aws-course-06-iam-permissions-validation-s3]]
 
-## Relacionados
+## Relações
 
-- [[iam-group]]
-- [[principle-of-least-privilege]]
-- [[mfa]]
-- [[resource-tags]]
-- [[arn]]
-- [[aws-security]]
+- [[concepts/iam-group]]
+- [[concepts/iam-role]]
+- [[concepts/iam-policy]]
+- [[concepts/customer-managed-policy]]
+- [[concepts/inline-policy]]
+- [[concepts/principle-of-least-privilege]]
+- [[concepts/mfa]]
+- [[concepts/resource-tags]]
+- [[concepts/arn]]
+- [[topics/aws-security]]
