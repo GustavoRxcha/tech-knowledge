@@ -1,10 +1,10 @@
 ---
 title: "Overview"
 type: overview
-tags: [aws, iam, segurança]
+tags: [aws, iam, s3, segurança]
 created: 2026-05-18
 updated: 2026-05-18
-sources: 4
+sources: 6
 ---
 
 # Tech Knowledge Wiki — Overview
@@ -15,7 +15,7 @@ Síntese evolutiva do panorama geral. Atualizada sempre que uma nova fonte muda 
 
 ## Estado atual
 
-O wiki cobre, no momento, **fundamentos de segurança e IAM na AWS**, ingeridos a partir das quatro primeiras aulas de um curso AWS (PT-BR). Foco operacional: bootstrappar uma conta com baseline de segurança, criar usuários IAM, organizar permissões em [[iam-group|grupos]] e validar [[principle-of-least-privilege|menor privilégio]] na prática.
+O wiki concluiu o **módulo completo de IAM da AWS** (aulas 01–06). Cobre desde o bootstrap inicial da conta até roles, policies personalizadas e validação prática de permissões no S3. O próximo módulo do curso é **Amazon S3 — Armazenamento de Objetos**.
 
 ---
 
@@ -27,36 +27,48 @@ O wiki cobre, no momento, **fundamentos de segurança e IAM na AWS**, ingeridos 
 | Linguagens | — | — |
 | Frameworks | — | — |
 | Arquitetura | — | — |
-| Infraestrutura — cloud AWS | 🌱 inicial | [[aws]], [[aws-iam]], [[amazon-s3]], [[aws-lambda]] (stub), [[amazon-ec2]] (stub), [[amazon-dynamodb]] (stub) |
-| Bancos de dados | 🔴 só stub | [[amazon-dynamodb]] |
-| Segurança — IAM/AWS | 🟢 cobertura sólida do baseline | [[aws-security]], [[mfa]], [[iam-policy]], [[iam-group]] |
+| Infraestrutura — cloud AWS | 🟡 módulo IAM completo | [[entities/aws]], [[entities/aws-iam]], [[entities/amazon-s3]], [[entities/aws-lambda]], [[entities/amazon-ec2]] (stub), [[entities/amazon-dynamodb]] (stub) |
+| Bancos de dados | 🔴 só stub | [[entities/amazon-dynamodb]] |
+| Segurança — IAM/AWS | 🟢 cobertura sólida do baseline | [[topics/aws-security]], [[concepts/mfa]], [[concepts/iam-policy]], [[concepts/iam-group]], [[concepts/iam-role]], [[concepts/customer-managed-policy]], [[concepts/s3-block-public-access]] |
 | Prática de engenharia | — | — |
 
 ---
 
-## Perguntas em aberto
+## Modelo mental do IAM (consolidado)
 
-- **IAM Roles** (próxima aula): assume-role, uso por serviços/usuários, vs usuários com [[access-keys]] de longa duração.
-- **Customer-managed policies** (próxima aula): quando criar do zero em vez de usar managed da AWS.
-- Como [[iam-policy|policies]] de identidade interagem com bucket policies em [[amazon-s3]]?
-- Como usar [[resource-tags|tags]] como condição em policies (`aws:ResourceTag`)?
-- Limites práticos de grupos (máximo de policies por grupo, etc.) — ainda não declarados nas fontes.
+O IAM organiza acesso em torno de quatro perguntas:
+
+1. **Quem?** — usuário, grupo, role, serviço
+2. **O quê?** — actions (`s3:GetObject`, `lambda:InvokeFunction`...)
+3. **Em quê?** — resources identificados por [[concepts/arn|ARN]]
+4. **Como?** — via policy (managed, customer-managed, inline)
+
+A hierarquia recomendada de permissão: **policy → grupo → usuário**. Para serviços: **policy → role → serviço**.
 
 ---
 
 ## Temas emergentes
 
-- **Menor privilégio como princípio operacional**: cada aula reforça e a aula 4 valida com erros reais (`You are not authorized to perform this operation.`).
-- **Hierarquia de anexação**: o caminho recomendado de permissão é **policy → grupo → usuário**, não policy direta no usuário.
-- **Managed primeiro, inline como exceção**: para casos padrão a AWS já tem ~centenas de managed policies; criar do zero só quando necessário.
-- O par **identidade + recurso**, mediado por [[arn|ARNs]], é o modelo central de autorização da AWS.
-- Operações sensíveis (criação de access key) são **one-shot e irreversíveis** — falhar em baixar o CSV implica regerar credenciais.
+- **Menor privilégio como prática operacional**: validado com erros reais em aulas 4 e 6 (`You are not authorized to perform this operation.`).
+- **Roles como padrão para serviços**: Lambda + S3 demonstrou o modelo — nenhum serviço deve usar access keys hardcodadas.
+- **Block Public Access como default**: configuração de segurança S3 essencial, deve ser habilitada por padrão em qualquer bucket.
+- **Customer-managed policies** para casos não cobertos pelas managed da AWS.
 
 ---
 
-## Lacunas
+## Próximas perguntas abertas
 
-- **IAM Roles, customer-managed policies, SCPs, AWS Organizations, KMS, CloudTrail** — nada coberto.
-- [[amazon-s3]] tem só duas actions ilustrativas; o resto do serviço (versionamento, criptografia, lifecycle etc.) está em aberto.
-- [[aws-lambda]], [[amazon-ec2]], [[amazon-dynamodb]] estão como stubs — apenas posicionados no modelo mental, sem profundidade.
-- Tudo fora do tópico AWS — outras linguagens, frameworks, AI/ML, arquitetura — ainda sem fontes.
+- Como funciona cross-account role (assume-role entre contas)?
+- Como usar `aws:ResourceTag` como condição em policies?
+- Limites de grupos (máximo de policies por grupo, usuários por grupo)?
+- Bucket policies e ACLs do S3 — como interagem com as IAM policies?
+- Módulo S3: versionamento, criptografia, lifecycle, storage classes, presigned URLs, hospedagem estática.
+
+---
+
+## Lacunas do wiki
+
+- **IAM**: Roles cross-account, federação de identidade, SCPs, AWS Organizations, KMS, CloudTrail, IAM Access Analyzer — não cobertos.
+- **S3**: Apenas ações IAM básicas e Block Public Access. Módulo dedicado a ser ingerido.
+- **EC2, DynamoDB**: Stubs apenas.
+- Tudo fora do tópico AWS — linguagens, frameworks, AI/ML, arquitetura — ainda sem fontes.

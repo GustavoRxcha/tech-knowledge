@@ -4,6 +4,12 @@ Registro append-only de atividade do wiki. Entradas mais recentes no topo.
 
 ---
 
+## [2026-05-18] ingest | Curso AWS 06 — Validação de Permissões no S3 e Encerramento do Módulo IAM
+Fonte: `raw/aula-06-validacao-permissoes-s3-encerramento-iam.md`. Criadas: [[concepts/s3-block-public-access]]. Atualizadas: [[entities/amazon-s3]], [[entities/aws-iam]], [[topics/aws-security]], [[wiki/overview]]. Módulo IAM encerrado. Total: 6 páginas tocadas.
+
+## [2026-05-18] ingest | Curso AWS 05 — IAM Roles, Policies Personalizadas e Lambda
+Fonte: `raw/aula-05-roles-policies-personalizadas-lambda.md`. Criadas: [[concepts/iam-role]], [[concepts/customer-managed-policy]]. Upgrade de stub: [[entities/aws-lambda]]. Atualizadas: [[entities/aws-iam]], [[entities/amazon-s3]], [[topics/aws-security]], [[wiki/overview]]. Total: 9 páginas tocadas.
+
 ## [2026-05-18] ingest | Curso AWS 04 — Grupos de Usuários IAM
 Fonte: `raw/aula-04-grupos-usuarios-iam.md`. Criadas: [[iam-group]] (conceito), [[aws-lambda]], [[amazon-ec2]], [[amazon-dynamodb]] (stubs). Atualizadas: [[aws-iam]], [[aws]], [[iam-policy]], [[inline-policy]], [[principle-of-least-privilege]], [[aws-security]], [[overview]]. Total: 14 páginas tocadas.
 
