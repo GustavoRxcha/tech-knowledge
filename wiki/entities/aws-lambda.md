@@ -1,10 +1,10 @@
 ---
 title: "AWS Lambda"
 type: entity
-tags: [aws, lambda, serverless, computação, roles]
+tags: [aws, lambda, serverless, computação, roles, triggers]
 created: 2026-05-18
-updated: 2026-05-19
-sources: 5
+updated: 2026-05-20
+sources: 6
 ---
 
 # AWS Lambda
@@ -144,17 +144,50 @@ No console: editar código → **Deploy** publica a versão atual. Para automaç
 - ✅ Logs estruturados (CloudWatch captura tudo do `console.log` / `print`)
 - ✅ Lambda + API Gateway + Cognito na **mesma região**
 
+## Triggers comuns (event sources)
+
+| Trigger | Descrição |
+|---|---|
+| **API Gateway** | Requisição HTTP → Lambda processa e responde |
+| **Upload no S3** | Arquivo cai em bucket → Lambda processa |
+| **Mensagem no SQS** | Mensagem entra na fila → Lambda consome |
+| **Evento do SNS** | Tópico SNS publica → Lambda é notificada |
+| **Agendamento (EventBridge)** | Horários definidos (ex: todo dia às 8h) |
+| **Mudança no DynamoDB** | Item inserido/atualizado via Streams → Lambda reage |
+| **Cognito** | Triggers de auth (pre-signup, post-confirm, etc.) |
+
+> O Lambda é o "cola" entre serviços AWS — conecta eventos de um serviço a ações em outro.
+
+## Modelo de cobrança
+
+| Fator | Descrição |
+|---|---|
+| Número de invocações | Cada vez que a função é chamada |
+| Tempo de execução | Medido em milissegundos × memória configurada (GB-segundos) |
+
+**Nível gratuito permanente:** 1 milhão de invocações + 400.000 GB-segundos/mês.
+
+## Ecossistema serverless na AWS
+
+| Serviço | Função |
+|---|---|
+| **AWS Lambda** | Execução de código por evento |
+| **Amazon API Gateway** | API HTTP serverless |
+| **Amazon DynamoDB** | Banco NoSQL serverless |
+| **Amazon S3** | Armazenamento serverless |
+| **AWS Fargate** | Containers serverless |
+| **Amazon EventBridge** | Barramento de eventos serverless |
+
 ## Lacunas
 
-- Triggers/event sources detalhados (S3, SQS, EventBridge, etc.)
 - Layers e dependências externas
 - Cold starts e provisioned concurrency
 - VPC config
-- Pricing detalhado
 - Observabilidade (X-Ray, structured logging, métricas custom)
 
 ## Fontes
 
+- [[sources/clf-c02-aula13-serverless-lambda]] — visão conceitual (triggers, pricing, ecossistema)
 - [[sources/aws-course-04-iam-groups]] — mencionado
 - [[sources/aws-course-05-iam-roles-custom-policies-lambda]] — execution role + S3
 - [[sources/aws-course-dynamo-01-table-lambda-intro]] — criação da função

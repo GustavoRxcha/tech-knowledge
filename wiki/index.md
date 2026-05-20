@@ -1,7 +1,7 @@
 ---
 title: "Index"
 type: overview
-updated: 2026-05-19
+updated: 2026-05-20
 ---
 
 # Index
@@ -33,6 +33,25 @@ Catálogo principal de todas as páginas do wiki. O LLM lê isto primeiro para n
 - [[sources/clf-c02-aula03-service-models]] — Modelos de serviço: IaaS, PaaS, SaaS (2026-05-19)
 - [[sources/clf-c02-aula04-deployment-models]] — Modelos de implantação: on-premises, híbrido, cloud, privada (2026-05-19)
 
+### Trilha CLF-C02 — Infraestrutura Global AWS
+- [[sources/clf-c02-aula05-global-infrastructure]] — Hierarquia da infra global: Regiões, AZs, Edge Locations, formas de provisionar (2026-05-20)
+- [[sources/clf-c02-aula06-regions-az]] — Regiões: isolamento, compliance (LGPD/GDPR), 4 critérios; AZs: escopo de serviço (2026-05-20)
+- [[sources/clf-c02-aula07-edge-cloudfront-route53]] — Edge Locations, CloudFront (CDN), Route 53 (DNS) (2026-05-20)
+- [[sources/clf-c02-aula08-provisioning]] — Console, CLI, SDKs (boto3), Elastic Beanstalk, CloudFormation (IaC) (2026-05-20)
+
+### Trilha CLF-C02 — Computação na AWS
+- [[sources/clf-c02-aula09-ec2-instance-types]] — EC2: AMI, lifecycle (6 estados), 5 famílias de instância (2026-05-20)
+- [[sources/clf-c02-aula10-ec2-auto-scaling]] — Auto Scaling Group: min/desejado/max, preditivo vs dinâmico, multi-AZ (2026-05-20)
+- [[sources/clf-c02-aula11-elastic-load-balancing]] — ELB: ALB/NLB/GWLB, health checks, integração Auto Scaling (2026-05-20)
+- [[sources/clf-c02-aula12-messaging-sqs-sns]] — SQS (fila FIFO) e SNS (Pub/Sub), desacoplamento de microsserviços, fanout (2026-05-20)
+- [[sources/clf-c02-aula13-serverless-lambda]] — Serverless e Lambda: triggers, pricing, ecossistema serverless (2026-05-20)
+- [[sources/clf-c02-aula14-containers-ecr-ecs-eks-fargate]] — Containers: Docker, ECR, ECS, EKS, Fargate (2026-05-20)
+
+### Trilha CLF-C02 — Redes na AWS
+- [[sources/clf-c02-aula15-vpc]] — VPC: rede virtual privada, sub-redes públicas/privadas, multi-AZ (2026-05-20)
+- [[sources/clf-c02-aula16-connectivity]] — Conectividade: IGW, VPN com Virtual Private Gateway, AWS Direct Connect (2026-05-20)
+- [[sources/clf-c02-aula16-1-nacl-security-groups]] — Network ACLs (stateless, sub-rede) e Security Groups (stateful, instância) (2026-05-20)
+
 ## Entities
 - [[entities/aws]] — A plataforma de nuvem da Amazon
 - [[entities/aws-iam]] — Serviço de identidade e acesso da AWS
@@ -45,6 +64,20 @@ Catálogo principal de todas as páginas do wiki. O LLM lê isto primeiro para n
 - [[entities/aws-elastic-beanstalk]] — PaaS da AWS (deploy sem gerenciar infra)
 - [[entities/google-authenticator]] — App TOTP usado para MFA
 - [[entities/postman]] — Cliente GUI para testar APIs HTTP
+- [[entities/amazon-cloudfront]] — CDN da AWS; usa Edge Locations para entregar conteúdo com baixa latência
+- [[entities/amazon-route53]] — Serviço DNS gerenciado; opera nos Edge Locations
+- [[entities/aws-cloudformation]] — IaC nativo da AWS; templates JSON/YAML; rollback automático
+- [[entities/amazon-ec2-auto-scaling]] — Escala instâncias EC2 automaticamente; ASG com min/desejado/max; preditivo vs dinâmico
+- [[entities/elastic-load-balancing]] — Distribui tráfego entre instâncias; ALB/NLB/GWLB; health checks
+- [[entities/amazon-sqs]] — Fila de mensagens gerenciada; FIFO; desacoplamento de microsserviços
+- [[entities/amazon-sns]] — Pub/Sub; tópicos; notificações para múltiplos assinantes; fanout
+- [[entities/amazon-ecr]] — Repositório gerenciado de imagens Docker
+- [[entities/amazon-ecs]] — Orquestrador nativo AWS para containers Docker
+- [[entities/amazon-eks]] — Kubernetes gerenciado na AWS
+- [[entities/aws-fargate]] — Infraestrutura serverless para containers (ECS/EKS)
+- [[entities/amazon-vpc]] — Rede virtual privada; alicerce de toda infraestrutura na AWS
+- [[entities/aws-internet-gateway]] — Porta de entrada da VPC para internet pública (IGW)
+- [[entities/aws-direct-connect]] — Conexão de fibra óptica dedicada; até 100 Gbps
 
 ## Concepts
 
@@ -83,9 +116,37 @@ Catálogo principal de todas as páginas do wiki. O LLM lê isto primeiro para n
 ### Storage & segurança
 - [[concepts/s3-block-public-access]] — Configuração que impede exposição pública de buckets
 
+### Infraestrutura Global AWS
+- [[concepts/aws-region]] — Região: agrupamento geográfico, isolamento de dados, 4 critérios de escolha (compliance > latência > serviços > custo)
+- [[concepts/availability-zone]] — AZ: data center isolado dentro de uma Região; escopo AZ vs regional
+- [[concepts/edge-location]] — Ponto de Presença / Edge Location: cache, CDN, DNS; 400+ locais
+- [[concepts/high-availability]] — Serviço continua operando com falha parcial
+- [[concepts/fault-tolerance]] — Arquitetura que resiste a falhas sem interrupção
+
+### Provisionamento e DevOps
+- [[concepts/infrastructure-as-code]] — IaC: infra declarada em código, versionável, reprodutível
+- [[concepts/aws-cli]] — CLI da AWS: terminal, automação, `aws configure`
+
+### Computação e escalabilidade
+- [[concepts/auto-scaling]] — Escalabilidade horizontal automática; parâmetros min/desejado/max
+- [[concepts/load-balancing]] — Distribuição de tráfego entre instâncias; health checks
+
+### Mensageria e eventos
+- [[concepts/microservices]] — Arquitetura de microsserviços; desacoplamento via mensageria
+- [[concepts/pub-sub]] — Publisher/Subscriber; one-to-many; implementado pelo SNS
+
+### Containers
+- [[concepts/containers]] — Docker; portabilidade; imagens; Dockerfile; VMs vs containers
+
 ### Arquitetura
 - [[concepts/serverless]] — Modelo sem provisionar servidor, escala automática
 - [[concepts/nosql]] — Bancos não-relacionais
+
+### Redes e segurança de rede
+- [[concepts/subnet]] — Sub-rede pública (internet) vs privada (isolada) dentro de uma VPC
+- [[concepts/network-acl]] — Firewall stateless de nível de sub-rede; padrão permissivo
+- [[concepts/security-group]] — Firewall stateful de nível de instância EC2; padrão entrada bloqueada
+- [[concepts/vpn]] — Túnel criptografado; Virtual Private Gateway; conecta data center à AWS
 
 ## Topics
 - [[topics/aws-security]] — Trilha hands-on: IAM completo + auth via Cognito

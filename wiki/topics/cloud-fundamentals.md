@@ -3,8 +3,8 @@ title: "Cloud Fundamentals (CLF-C02)"
 type: topic
 tags: [cloud, fundamentos, clf-c02, certificação, conceitual]
 created: 2026-05-19
-updated: 2026-05-19
-sources: 4
+updated: 2026-05-20
+sources: 17
 ---
 
 # Cloud Fundamentals — Trilha CLF-C02
@@ -38,6 +38,54 @@ Página de tópico que agrupa todo o conteúdo conceitual do preparatório **AWS
 ### Tecnologias de base
 - [[concepts/virtualization]] — hypervisor, fundação técnica da cloud
 
+### Infraestrutura Global AWS
+- [[concepts/aws-region]] — Região: agrupamento geográfico, isolamento de dados, compliance (LGPD/GDPR), 4 critérios de escolha
+- [[concepts/availability-zone]] — AZ: data center isolado dentro de uma Região; escopo de AZ vs regional
+- [[concepts/edge-location]] — Ponto de Presença / Edge Location / Local de Borda: cache, CDN, DNS
+- [[concepts/high-availability]] — serviço continua com falha parcial
+- [[concepts/fault-tolerance]] — arquitetura resiste a falhas
+
+### Serviços de borda e CDN
+- [[entities/amazon-cloudfront]] — CDN da AWS; usa Edge Locations
+- [[entities/amazon-route53]] — DNS gerenciado; opera nos Edge Locations
+
+### Provisionamento e IaC
+- [[concepts/aws-cli]] — CLI; automação via terminal; `aws configure`
+- [[concepts/infrastructure-as-code]] — IaC: infra declarada em arquivo, versionável, reprodutível
+- [[entities/aws-cloudformation]] — IaC nativo AWS; JSON/YAML templates; rollback automático
+
+### Computação na AWS — EC2
+- [[entities/amazon-ec2]] — VMs; 5 famílias (Geral, Computação, Memória, Acelerada, Armazenamento); AMI; lifecycle
+- [[entities/amazon-ec2-auto-scaling]] — ASG; min/desejado/max; escalabilidade preditiva vs dinâmica; multi-AZ
+- [[entities/elastic-load-balancing]] — ELB; ALB/NLB/GWLB; health checks; escopo regional
+- [[concepts/auto-scaling]] — horizontal vs vertical; parâmetros de capacidade
+- [[concepts/load-balancing]] — distribuição de tráfego entre instâncias
+
+### Computação na AWS — Mensageria
+- [[entities/amazon-sqs]] — fila FIFO; produtor/consumidor; resiliência
+- [[entities/amazon-sns]] — Pub/Sub; tópicos; múltiplos assinantes simultâneos; fanout
+- [[concepts/microservices]] — desacoplamento entre serviços independentes
+- [[concepts/pub-sub]] — Publisher/Subscriber; padrão implementado pelo SNS
+
+### Computação na AWS — Serverless e Containers
+- [[entities/aws-lambda]] — execução por evento; triggers; pay-per-use; ecossistema serverless
+- [[entities/amazon-ecr]] — repositório de imagens Docker
+- [[entities/amazon-ecs]] — orquestrador nativo AWS
+- [[entities/amazon-eks]] — Kubernetes gerenciado na AWS
+- [[entities/aws-fargate]] — infraestrutura serverless para containers
+- [[concepts/containers]] — Docker; portabilidade; imagens; Dockerfile
+
+### Redes na AWS — VPC e Conectividade
+- [[entities/amazon-vpc]] — Rede virtual privada; alicerce de toda infraestrutura; "tudo começa com uma VPC"
+- [[concepts/subnet]] — Sub-rede pública (internet) vs privada (isolada)
+- [[entities/aws-internet-gateway]] — IGW; porta de entrada/saída da VPC para internet pública
+- [[concepts/vpn]] — Túnel criptografado; Virtual Private Gateway; conecta data center corporativo
+- [[entities/aws-direct-connect]] — Fibra óptica dedicada; até 100 Gbps; baixíssima latência
+
+### Redes na AWS — Segurança
+- [[concepts/network-acl]] — NACL; firewall de sub-rede; stateless; padrão permissivo
+- [[concepts/security-group]] — Firewall de instância EC2; stateful; padrão entrada bloqueada
+
 ---
 
 ## Atalho para a prova
@@ -56,6 +104,34 @@ Página de tópico que agrupa todo o conteúdo conceitual do preparatório **AWS
 | "data center próprio" | [[concepts/on-premises]] |
 | "migração gradual", "parte local + nuvem" | [[concepts/hybrid-cloud]] |
 | "VMware/OpenStack local" | [[concepts/private-cloud]] |
+| "latência para usuários globais", "CDN" | [[entities/amazon-cloudfront\|CloudFront]] + [[concepts/edge-location\|Edge Locations]] |
+| "tradução de domínio DNS" | [[entities/amazon-route53\|Route 53]] |
+| "infra a partir de arquivo JSON/YAML" | [[entities/aws-cloudformation\|CloudFormation]] |
+| "deploy de app sem gerenciar EC2" | [[entities/aws-elastic-beanstalk\|Elastic Beanstalk]] |
+| "dados legais devem ficar no Brasil" | Compliance → Região `sa-east-1` |
+| "tolerância a falhas de data center" | [[concepts/availability-zone\|Múltiplas AZs]] |
+| "aplicação web genérica sem requisito específico" | EC2 [[entities/amazon-ec2\|Uso Geral]] |
+| "banco de dados em memória, Redis, SAP HANA" | EC2 [[entities/amazon-ec2\|Memória]] |
+| "ML, GPU, Deep Learning" | EC2 [[entities/amazon-ec2\|Acelerada]] |
+| "data warehouse, OLTP com I/O intensivo" | EC2 [[entities/amazon-ec2\|Armazenamento]] |
+| "escala automática, pico de tráfego" | [[entities/amazon-ec2-auto-scaling\|EC2 Auto Scaling]] |
+| "distribuição de tráfego entre instâncias" | [[entities/elastic-load-balancing\|ELB]] |
+| "comunicação assíncrona, fila de mensagens" | [[entities/amazon-sqs\|SQS]] |
+| "notificar múltiplos sistemas simultaneamente" | [[entities/amazon-sns\|SNS]] |
+| "armazenar imagens Docker na AWS" | [[entities/amazon-ecr\|ECR]] |
+| "executar containers Docker (nativo AWS)" | [[entities/amazon-ecs\|ECS]] |
+| "Kubernetes gerenciado" | [[entities/amazon-eks\|EKS]] |
+| "containers sem gerenciar servidores" | [[entities/aws-fargate\|Fargate]] |
+| "rede virtual privada na AWS" | [[entities/amazon-vpc\|VPC]] |
+| "primeiro passo ao construir infraestrutura na AWS" | [[entities/amazon-vpc\|VPC]] (criar a VPC) |
+| "banco de dados isolado da internet" | [[concepts/subnet\|Sub-rede privada]] |
+| "EC2 precisa de acesso internet" | [[entities/aws-internet-gateway\|Internet Gateway (IGW)]] |
+| "conectar data center corporativo com segurança" | [[concepts/vpn\|VPN com Virtual Private Gateway]] |
+| "altíssima velocidade, fibra dedicada, data center" | [[entities/aws-direct-connect\|AWS Direct Connect]] |
+| "controle de tráfego no nível da sub-rede" | [[concepts/network-acl\|Network ACL (NACL)]] — stateless |
+| "controle de tráfego no nível da instância" | [[concepts/security-group\|Security Group]] — stateful |
+| "stateless, firewall de sub-rede" | [[concepts/network-acl\|NACL]] |
+| "stateful, firewall de instância" | [[concepts/security-group\|Security Group]] |
 
 ### Pares que mais caem
 
@@ -73,13 +149,25 @@ Página de tópico que agrupa todo o conteúdo conceitual do preparatório **AWS
 | 02 | Benefícios da Cloud | ✅ [[sources/clf-c02-aula02-cloud-benefits]] |
 | 03 | Modelos de Serviço | ✅ [[sources/clf-c02-aula03-service-models]] |
 | 04 | Modelos de Implantação | ✅ [[sources/clf-c02-aula04-deployment-models]] |
-| 05+ | (próximos módulos) | 🔜 |
+| 05 | Infraestrutura Global AWS | ✅ [[sources/clf-c02-aula05-global-infrastructure]] |
+| 06 | Regiões e Zonas de Disponibilidade | ✅ [[sources/clf-c02-aula06-regions-az]] |
+| 07 | Edge Locations, CloudFront e Route 53 | ✅ [[sources/clf-c02-aula07-edge-cloudfront-route53]] |
+| 08 | Provisionamento: Console, CLI, SDK, EB, CloudFormation | ✅ [[sources/clf-c02-aula08-provisioning]] |
+| 09 | EC2: AMI, lifecycle, 5 famílias de instância | ✅ [[sources/clf-c02-aula09-ec2-instance-types]] |
+| 10 | EC2 Auto Scaling: ASG, preditivo vs dinâmico, multi-AZ | ✅ [[sources/clf-c02-aula10-ec2-auto-scaling]] |
+| 11 | Elastic Load Balancing: ELB, ALB/NLB/GWLB, health checks | ✅ [[sources/clf-c02-aula11-elastic-load-balancing]] |
+| 12 | Mensageria: SQS (fila), SNS (Pub/Sub), fanout | ✅ [[sources/clf-c02-aula12-messaging-sqs-sns]] |
+| 13 | Serverless: Lambda, triggers, pricing, ecossistema | ✅ [[sources/clf-c02-aula13-serverless-lambda]] |
+| 14 | Containers: Docker, ECR, ECS, EKS, Fargate | ✅ [[sources/clf-c02-aula14-containers-ecr-ecs-eks-fargate]] |
+| 15 | VPC: sub-redes públicas/privadas, multi-AZ | ✅ [[sources/clf-c02-aula15-vpc]] |
+| 16 | Conectividade: IGW, VPN (VGW), Direct Connect | ✅ [[sources/clf-c02-aula16-connectivity]] |
+| 16.1 | Network ACLs (stateless) e Security Groups (stateful) | ✅ [[sources/clf-c02-aula16-1-nacl-security-groups]] |
+| 17+ | (próximos módulos) | 🔜 |
 
 ## Próximos temas esperados no curso
 
-A última aula citou como próximos blocos: "Benefícios da Cloud, Modelos de Serviço, Modelos de Implantação" — esses três já estão cobertos. A continuação típica do CLF-C02 inclui:
+A continuação típica do CLF-C02 após o módulo de infraestrutura:
 
-- AWS Global Infrastructure (regiões, AZs, edge locations)
 - AWS Well-Architected Framework
 - Shared Responsibility Model
 - AWS Pricing & Support Plans
@@ -87,8 +175,9 @@ A última aula citou como próximos blocos: "Benefícios da Cloud, Modelos de Se
 
 ## Lacunas
 
-- Tudo após a aula 04 — nada ingerido ainda.
-- Sem cobertura de Well-Architected, Shared Responsibility, regiões, billing.
+- Tudo após a aula 16.1 — nada ingerido ainda.
+- Sem cobertura de Well-Architected, Shared Responsibility, billing e catálogo de serviços avançados.
+- Redes avançadas: NAT Gateway, VPC Peering, PrivateLink, Route Tables detalhadas.
 
 ## Fontes
 
@@ -96,3 +185,16 @@ A última aula citou como próximos blocos: "Benefícios da Cloud, Modelos de Se
 - [[sources/clf-c02-aula02-cloud-benefits]]
 - [[sources/clf-c02-aula03-service-models]]
 - [[sources/clf-c02-aula04-deployment-models]]
+- [[sources/clf-c02-aula05-global-infrastructure]]
+- [[sources/clf-c02-aula06-regions-az]]
+- [[sources/clf-c02-aula07-edge-cloudfront-route53]]
+- [[sources/clf-c02-aula08-provisioning]]
+- [[sources/clf-c02-aula09-ec2-instance-types]]
+- [[sources/clf-c02-aula10-ec2-auto-scaling]]
+- [[sources/clf-c02-aula11-elastic-load-balancing]]
+- [[sources/clf-c02-aula12-messaging-sqs-sns]]
+- [[sources/clf-c02-aula13-serverless-lambda]]
+- [[sources/clf-c02-aula14-containers-ecr-ecs-eks-fargate]]
+- [[sources/clf-c02-aula15-vpc]]
+- [[sources/clf-c02-aula16-connectivity]]
+- [[sources/clf-c02-aula16-1-nacl-security-groups]]

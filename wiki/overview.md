@@ -1,10 +1,10 @@
 ---
 title: "Overview"
 type: overview
-tags: [aws, iam, s3, serverless, cloud, clf-c02, segurança]
+tags: [aws, iam, s3, serverless, cloud, clf-c02, segurança, infraestrutura-global, redes]
 created: 2026-05-18
-updated: 2026-05-19
-sources: 15
+updated: 2026-05-20
+sources: 28
 ---
 
 # Tech Knowledge Wiki — Overview
@@ -18,7 +18,7 @@ Síntese evolutiva do panorama geral. Atualizada sempre que uma nova fonte muda 
 O wiki cobre AWS por **duas trilhas paralelas**:
 
 1. **Trilha hands-on** (11 sources): curso prático com módulos IAM (6 aulas) e Serverless (5 aulas: Cognito intro + DynamoDB + API Gateway). Arquitetura CRUD completa rodando ponta-a-ponta.
-2. **Trilha CLF-C02** (4 sources): preparatório conceitual para a certificação AWS Cloud Practitioner. Cobertura inicial: definição de cloud, benefícios, modelos de serviço e implantação.
+2. **Trilha CLF-C02** (17 sources): preparatório conceitual para a certificação AWS Cloud Practitioner. Cobertura: definição de cloud, benefícios, modelos de serviço, modelos de implantação, infraestrutura global (Regiões, AZs, Edge Locations), formas de provisionamento, **módulo completo de Computação** (EC2 + Auto Scaling + ELB + SQS + SNS + Lambda + Containers), **módulo de Redes** (VPC, sub-redes, IGW, VPN, Direct Connect, NACLs, Security Groups).
 
 As duas trilhas se cruzam — IaaS/PaaS/SaaS conceituais da CLF-C02 ancoram [[entities/amazon-ec2|EC2]], [[entities/aws-elastic-beanstalk|Elastic Beanstalk]] e [[entities/aws-lambda|Lambda]] da prática.
 
@@ -31,7 +31,7 @@ As duas trilhas se cruzam — IaaS/PaaS/SaaS conceituais da CLF-C02 ancoram [[en
 | AI/ML & LLMs | — | — |
 | Linguagens | 🌱 inicial (Node.js + Python via SDK) | [[sources/aws-course-dynamo-02-lambda-crud]] |
 | Frameworks | — | — |
-| Cloud — fundamentos / CLF-C02 | 🟢 4 aulas cobertas | [[topics/cloud-fundamentals]], [[concepts/cloud-computing]], [[concepts/iaas]] / [[concepts/paas]] / [[concepts/saas]] |
+| Cloud — fundamentos / CLF-C02 | 🟢 17 aulas cobertas | [[topics/cloud-fundamentals]], [[concepts/aws-region]], [[entities/elastic-load-balancing]], [[entities/amazon-sqs]], [[entities/amazon-sns]], [[entities/amazon-ecs]], [[entities/aws-fargate]], [[entities/amazon-vpc]], [[concepts/network-acl]], [[concepts/security-group]] |
 | Arquitetura — serverless | 🟢 cobertura prática | [[concepts/serverless]], [[entities/aws-lambda]], [[entities/amazon-api-gateway]], [[entities/amazon-dynamodb]] |
 | Infraestrutura — cloud AWS | 🟢 sólida na faixa coberta | [[entities/aws]] e todos os serviços listados nele |
 | Bancos de dados | 🟡 DynamoDB cobre o básico | [[entities/amazon-dynamodb]], [[concepts/nosql]] |
@@ -67,6 +67,12 @@ Tudo serverless, mesma região, sem credenciais hardcodadas.
 - **Por que cloud**: 5 benefícios (CapEx→OpEx, [[concepts/elasticity|elasticidade]], economias de escala, agilidade, alcance global).
 - **Quanto gerencio**: [[concepts/iaas|IaaS]] / [[concepts/paas|PaaS]] / [[concepts/saas|SaaS]].
 - **Onde roda**: [[concepts/on-premises]] / [[concepts/hybrid-cloud|Híbrido]] / Cloud / [[concepts/private-cloud|Privada]].
+- **Como é organizado fisicamente**: [[concepts/aws-region|Regiões]] → [[concepts/availability-zone|AZs]] → Data Centers; [[concepts/edge-location|Edge Locations]] (400+) para entrega de conteúdo.
+- **Como provisiono**: Console · [[concepts/aws-cli|CLI]] · SDKs · [[entities/aws-elastic-beanstalk|Beanstalk (PaaS)]] · [[entities/aws-cloudformation|CloudFormation (IaC)]].
+- **Computação EC2**: 5 famílias · [[entities/amazon-ec2-auto-scaling|Auto Scaling]] (preditivo/dinâmico, multi-AZ) · [[entities/elastic-load-balancing|ELB]] (ALB/NLB/GWLB).
+- **Mensageria**: [[entities/amazon-sqs|SQS]] (fila FIFO, one-to-one) + [[entities/amazon-sns|SNS]] (Pub/Sub, one-to-many) = fanout e desacoplamento de microsserviços.
+- **Serverless e containers**: Lambda por evento · ECS/EKS orquestram containers via ECR · Fargate elimina gerenciamento de infra.
+- **Redes**: [[entities/amazon-vpc|VPC]] é o alicerce · sub-redes públicas (IGW) vs privadas · IGW para internet · VPN para data center · Direct Connect para alto desempenho · [[concepts/network-acl|NACL]] (stateless, sub-rede) + [[concepts/security-group|Security Group]] (stateful, instância) = defesa em profundidade.
 
 ---
 
@@ -96,7 +102,6 @@ Tudo serverless, mesma região, sem credenciais hardcodadas.
 - Lambda: cold starts, layers, observabilidade.
 
 ### Trilha CLF-C02
-- AWS Global Infrastructure (regiões, AZs, edge locations).
 - Well-Architected Framework.
 - Shared Responsibility Model.
 - Pricing & Support Plans.
@@ -113,7 +118,7 @@ Tudo serverless, mesma região, sem credenciais hardcodadas.
 - **API Gateway**: custom domain, CORS, throttling, validação.
 - **Cognito**: User Pool real, authorizer no API Gateway, Identity Pool, federação social.
 - **EC2**: tudo além da menção conceitual e do "acesso negado".
-- **CLF-C02**: tudo depois da aula 04 (Global Infrastructure, Well-Architected, billing, catálogo).
+- **CLF-C02**: tudo depois da aula 16.1 (Well-Architected, Shared Responsibility, billing, catálogo de serviços avançados). Redes avançadas: NAT Gateway, VPC Peering, PrivateLink.
 - Tudo fora do tópico AWS — linguagens, frameworks, AI/ML, arquitetura clássica — ainda sem fontes.
 
 ---
