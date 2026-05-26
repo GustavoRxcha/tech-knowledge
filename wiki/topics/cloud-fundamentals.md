@@ -1,10 +1,10 @@
 ---
 title: "Cloud Fundamentals (CLF-C02)"
 type: topic
-tags: [cloud, fundamentos, clf-c02, certificação, conceitual]
+tags: [cloud, fundamentos, clf-c02, certificação, conceitual, segurança]
 created: 2026-05-19
-updated: 2026-05-20
-sources: 17
+updated: 2026-05-26
+sources: 18
 ---
 
 # Cloud Fundamentals — Trilha CLF-C02
@@ -162,22 +162,29 @@ Página de tópico que agrupa todo o conteúdo conceitual do preparatório **AWS
 | 15 | VPC: sub-redes públicas/privadas, multi-AZ | ✅ [[sources/clf-c02-aula15-vpc]] |
 | 16 | Conectividade: IGW, VPN (VGW), Direct Connect | ✅ [[sources/clf-c02-aula16-connectivity]] |
 | 16.1 | Network ACLs (stateless) e Security Groups (stateful) | ✅ [[sources/clf-c02-aula16-1-nacl-security-groups]] |
-| 17+ | (próximos módulos) | 🔜 |
+| 17-24 | Armazenamento e Banco de Dados (EBS, S3, EFS, RDS, Aurora, DynamoDB, DocumentDB, Neptune, QLDB, DAX, ElastiCache, Redshift) | ✅ [[sources/clf-c02-aulas17-24-storage-databases]] |
+| 1-6 (seg.) | Segurança na Nuvem: Shared Responsibility, KMS, IAM, Organizations, Artifact, WAF, Shield, Inspector, GuardDuty | ✅ [[sources/clf-c02-aulas1-6-seguranca-nuvem]] |
+| próximos | (Well-Architected, Pricing, suporte) | 🔜 |
 
-## Próximos temas esperados no curso
-
-A continuação típica do CLF-C02 após o módulo de infraestrutura:
-
-- AWS Well-Architected Framework
-- Shared Responsibility Model
-- AWS Pricing & Support Plans
-- Principais serviços AWS por categoria (compute, storage, database, network)
+### Segurança na Nuvem AWS
+- [[concepts/shared-responsibility-model]] — AWS: DA nuvem (infra); Cliente: NA nuvem (dados, acesso, config)
+- [[entities/aws-kms]] — criptografia de chaves; dados em repouso e em trânsito
+- [[concepts/encryption]] — data at rest vs data in transit
+- [[entities/aws-organizations]] — múltiplas contas; faturamento consolidado; gratuito
+- [[concepts/scp]] — Service Control Policies; teto de permissões por OU
+- [[entities/aws-artifact]] — relatórios de conformidade (LGPD, GDPR, HIPAA) e contratos digitais
+- [[entities/aws-waf]] — firewall L7 para apps web; SQL Injection, XSS
+- [[entities/aws-shield]] — DDoS; Standard (gratuito) vs Advanced (pago)
+- [[entities/amazon-inspector]] — scan de CVEs em EC2 e containers
+- [[entities/amazon-guardduty]] — detecção de ameaças via ML; logs DNS, VPC, CloudTrail
 
 ## Lacunas
 
-- Tudo após a aula 16.1 — nada ingerido ainda.
-- Sem cobertura de Well-Architected, Shared Responsibility, billing e catálogo de serviços avançados.
+- Well-Architected Framework — sem cobertura ainda.
+- Billing e AWS Pricing & Support Plans — sem cobertura.
 - Redes avançadas: NAT Gateway, VPC Peering, PrivateLink, Route Tables detalhadas.
+- CloudTrail — mencionado como fonte do GuardDuty, sem página própria.
+- Secrets Manager, Security Hub, IAM Access Analyzer — sem cobertura.
 
 ## Fontes
 
@@ -198,3 +205,4 @@ A continuação típica do CLF-C02 após o módulo de infraestrutura:
 - [[sources/clf-c02-aula15-vpc]]
 - [[sources/clf-c02-aula16-connectivity]]
 - [[sources/clf-c02-aula16-1-nacl-security-groups]]
+- [[sources/clf-c02-aulas1-6-seguranca-nuvem]]

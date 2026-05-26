@@ -1,10 +1,10 @@
 ---
 title: "Segurança AWS"
 type: topic
-tags: [aws, segurança, iam, mfa, s3, roles, cognito]
+tags: [aws, segurança, iam, mfa, s3, roles, cognito, kms, shield, waf, guardduty, inspector, clf-c02]
 created: 2026-05-18
-updated: 2026-05-19
-sources: 11
+updated: 2026-05-26
+sources: 12
 ---
 
 # Segurança AWS
@@ -85,10 +85,35 @@ Página de tópico agrupando tudo o que o wiki sabe sobre proteger uma conta [[e
 
 ---
 
+### Modelo de Responsabilidade Compartilhada
+- [[concepts/shared-responsibility-model]] — AWS cuida da infra (DA nuvem); cliente cuida dos dados e acesso (NA nuvem)
+
+### Criptografia
+- [[entities/aws-kms]] — gerencia chaves criptográficas; dados em repouso (EBS, S3, RDS) e em trânsito (SSL/TLS)
+- [[concepts/encryption]] — conceito base: data at rest vs data in transit
+
+### Organização de Contas
+- [[entities/aws-organizations]] — gerencia múltiplas contas; faturamento consolidado; gratuito
+- [[concepts/scp]] — Service Control Policies; teto de permissões por OU
+
+### Conformidade
+- [[entities/aws-artifact]] — relatórios de auditoria (Reports) e contratos digitais (Agreements); gratuito
+
+### Proteção de Aplicações e Rede
+- [[entities/aws-waf]] — firewall L7 para apps web; bloqueia SQL Injection, XSS
+- [[entities/aws-shield]] — proteção DDoS; Standard (gratuito, incluso) vs Advanced (pago)
+
+### Verificação e Detecção
+- [[entities/amazon-inspector]] — scan automático de CVEs em EC2 e containers
+- [[entities/amazon-guardduty]] — detecção de ameaças em tempo real via ML; monitora logs DNS, VPC, CloudTrail
+
+---
+
 ## Lacunas
 
-- SCPs (Service Control Policies), AWS Organizations — sem cobertura
-- KMS, Secrets Manager, GuardDuty, CloudTrail, Security Hub, IAM Access Analyzer — sem cobertura
+- Secrets Manager — sem cobertura
+- CloudTrail — mencionado como fonte de dados do GuardDuty, mas sem página própria
+- Security Hub, IAM Access Analyzer — sem cobertura
 - Bucket policies (resource-based) — sem cobertura
 - Tag-based conditions em policies (`aws:ResourceTag`) — sem cobertura
 - Cross-account roles e identidade federada — citados, não detalhados
@@ -110,3 +135,4 @@ Página de tópico agrupando tudo o que o wiki sabe sobre proteger uma conta [[e
 - [[sources/aws-course-dynamo-02-lambda-crud]]
 - [[sources/aws-course-apigateway-01-api-routes]]
 - [[sources/aws-course-apigateway-02-integration-postman]]
+- [[sources/clf-c02-aulas1-6-seguranca-nuvem]]

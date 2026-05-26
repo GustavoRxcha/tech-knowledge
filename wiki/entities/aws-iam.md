@@ -1,10 +1,10 @@
 ---
 title: "AWS IAM (Identity and Access Management)"
 type: entity
-tags: [aws, iam, segurança, identidade, controle-de-acesso]
+tags: [aws, iam, segurança, identidade, controle-de-acesso, clf-c02]
 created: 2026-05-18
-updated: 2026-05-18
-sources: 6
+updated: 2026-05-26
+sources: 7
 ---
 
 # AWS IAM — Identity and Access Management
@@ -72,6 +72,17 @@ Boas práticas consolidadas:
 - [[concepts/resource-tags|Tags]] para organizar recursos
 - Download do CSV de credenciais imediatamente após criar usuários
 
+## Perspectiva CLF-C02 (Aula 3 do módulo Segurança)
+
+Destaques adicionais para a certificação:
+- IAM é **gratuito**
+- Novo usuário criado tem acesso a **nada** por padrão (menor privilégio por design)
+- Grupos **não** podem ser aninhados (grupo dentro de grupo não é suportado)
+- Um usuário pode pertencer a **vários grupos** simultaneamente
+- **Role Switch** — um usuário pode assumir múltiplas roles e alternar entre elas conforme necessidade
+- Lambda acessa S3 via **IAM Role** — nunca via credenciais hardcodadas
+- Usuário Root: acesso irrestrito a tudo; usar apenas para tarefas específicas; sempre com MFA
+
 ## Fontes
 
 - [[sources/aws-course-01-mfa-iam-setup]]
@@ -80,6 +91,7 @@ Boas práticas consolidadas:
 - [[sources/aws-course-04-iam-groups]]
 - [[sources/aws-course-05-iam-roles-custom-policies-lambda]]
 - [[sources/aws-course-06-iam-permissions-validation-s3]]
+- [[sources/clf-c02-aulas1-6-seguranca-nuvem]] — revisão CLF-C02 com destaques para a prova
 
 ## Relações
 

@@ -52,6 +52,9 @@ Catálogo principal de todas as páginas do wiki. O LLM lê isto primeiro para n
 - [[sources/clf-c02-aula16-connectivity]] — Conectividade: IGW, VPN com Virtual Private Gateway, AWS Direct Connect (2026-05-20)
 - [[sources/clf-c02-aula16-1-nacl-security-groups]] — Network ACLs (stateless, sub-rede) e Security Groups (stateful, instância) (2026-05-20)
 
+### Trilha CLF-C02 — Segurança na Nuvem
+- [[sources/clf-c02-aulas1-6-seguranca-nuvem]] — Shared Responsibility Model, KMS, IAM (CLF-C02), Organizations, Artifact, WAF, Shield, Inspector, GuardDuty (2026-05-26)
+
 ## Entities
 - [[entities/aws]] — A plataforma de nuvem da Amazon
 - [[entities/aws-iam]] — Serviço de identidade e acesso da AWS
@@ -78,6 +81,13 @@ Catálogo principal de todas as páginas do wiki. O LLM lê isto primeiro para n
 - [[entities/amazon-vpc]] — Rede virtual privada; alicerce de toda infraestrutura na AWS
 - [[entities/aws-internet-gateway]] — Porta de entrada da VPC para internet pública (IGW)
 - [[entities/aws-direct-connect]] — Conexão de fibra óptica dedicada; até 100 Gbps
+- [[entities/aws-kms]] — Gerencia chaves criptográficas; dados em repouso e em trânsito
+- [[entities/aws-organizations]] — Gerencia múltiplas contas AWS; faturamento consolidado; SCPs; gratuito
+- [[entities/aws-artifact]] — Relatórios de conformidade (LGPD, GDPR, HIPAA) e contratos digitais; gratuito
+- [[entities/aws-waf]] — Firewall L7 para apps web; bloqueia SQL Injection e XSS
+- [[entities/aws-shield]] — Proteção DDoS; Standard (gratuito) vs Advanced (pago)
+- [[entities/amazon-inspector]] — Scan automático de CVEs em EC2 e containers
+- [[entities/amazon-guardduty]] — Detecção de ameaças em tempo real via Machine Learning
 
 ## Concepts
 
@@ -147,6 +157,11 @@ Catálogo principal de todas as páginas do wiki. O LLM lê isto primeiro para n
 - [[concepts/network-acl]] — Firewall stateless de nível de sub-rede; padrão permissivo
 - [[concepts/security-group]] — Firewall stateful de nível de instância EC2; padrão entrada bloqueada
 - [[concepts/vpn]] — Túnel criptografado; Virtual Private Gateway; conecta data center à AWS
+
+### Segurança na nuvem
+- [[concepts/shared-responsibility-model]] — AWS: segurança DA nuvem (infra); Cliente: segurança NA nuvem (dados, acesso)
+- [[concepts/encryption]] — Criptografia: data at rest (EBS, S3, RDS) vs data in transit (HTTPS, SSL/TLS)
+- [[concepts/scp]] — Service Control Policies; teto de permissões por OU no Organizations
 
 ## Topics
 - [[topics/aws-security]] — Trilha hands-on: IAM completo + auth via Cognito

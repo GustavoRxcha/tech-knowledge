@@ -1,10 +1,10 @@
 ---
 title: "Overview"
 type: overview
-tags: [aws, iam, s3, serverless, cloud, clf-c02, segurança, infraestrutura-global, redes]
+tags: [aws, iam, s3, serverless, cloud, clf-c02, segurança, infraestrutura-global, redes, kms, organizations, waf, shield]
 created: 2026-05-18
-updated: 2026-05-20
-sources: 28
+updated: 2026-05-26
+sources: 29
 ---
 
 # Tech Knowledge Wiki — Overview
@@ -18,7 +18,7 @@ Síntese evolutiva do panorama geral. Atualizada sempre que uma nova fonte muda 
 O wiki cobre AWS por **duas trilhas paralelas**:
 
 1. **Trilha hands-on** (11 sources): curso prático com módulos IAM (6 aulas) e Serverless (5 aulas: Cognito intro + DynamoDB + API Gateway). Arquitetura CRUD completa rodando ponta-a-ponta.
-2. **Trilha CLF-C02** (17 sources): preparatório conceitual para a certificação AWS Cloud Practitioner. Cobertura: definição de cloud, benefícios, modelos de serviço, modelos de implantação, infraestrutura global (Regiões, AZs, Edge Locations), formas de provisionamento, **módulo completo de Computação** (EC2 + Auto Scaling + ELB + SQS + SNS + Lambda + Containers), **módulo de Redes** (VPC, sub-redes, IGW, VPN, Direct Connect, NACLs, Security Groups).
+2. **Trilha CLF-C02** (18 sources): preparatório conceitual para a certificação AWS Cloud Practitioner. Cobertura: definição de cloud, benefícios, modelos de serviço, modelos de implantação, infraestrutura global (Regiões, AZs, Edge Locations), formas de provisionamento, **módulo completo de Computação** (EC2 + Auto Scaling + ELB + SQS + SNS + Lambda + Containers), **módulo de Redes** (VPC, sub-redes, IGW, VPN, Direct Connect, NACLs, Security Groups), **módulo de Segurança** (Shared Responsibility Model, KMS, IAM, Organizations, Artifact, WAF, Shield, Inspector, GuardDuty).
 
 As duas trilhas se cruzam — IaaS/PaaS/SaaS conceituais da CLF-C02 ancoram [[entities/amazon-ec2|EC2]], [[entities/aws-elastic-beanstalk|Elastic Beanstalk]] e [[entities/aws-lambda|Lambda]] da prática.
 
@@ -35,7 +35,7 @@ As duas trilhas se cruzam — IaaS/PaaS/SaaS conceituais da CLF-C02 ancoram [[en
 | Arquitetura — serverless | 🟢 cobertura prática | [[concepts/serverless]], [[entities/aws-lambda]], [[entities/amazon-api-gateway]], [[entities/amazon-dynamodb]] |
 | Infraestrutura — cloud AWS | 🟢 sólida na faixa coberta | [[entities/aws]] e todos os serviços listados nele |
 | Bancos de dados | 🟡 DynamoDB cobre o básico | [[entities/amazon-dynamodb]], [[concepts/nosql]] |
-| Segurança — IAM/AWS | 🟢 módulo completo | [[topics/aws-security]], [[concepts/iam-role]], [[concepts/iam-policy]], [[concepts/s3-block-public-access]] |
+| Segurança — IAM/AWS | 🟢 cobertura ampla | [[topics/aws-security]], [[concepts/shared-responsibility-model]], [[entities/aws-kms]], [[entities/aws-waf]], [[entities/aws-shield]], [[entities/amazon-inspector]], [[entities/amazon-guardduty]] |
 | Autenticação de usuários | 🟡 conceitual | [[entities/aws-cognito]], [[concepts/user-pool]], [[concepts/jwt]] |
 | Prática de engenharia | — | — |
 
@@ -73,6 +73,7 @@ Tudo serverless, mesma região, sem credenciais hardcodadas.
 - **Mensageria**: [[entities/amazon-sqs|SQS]] (fila FIFO, one-to-one) + [[entities/amazon-sns|SNS]] (Pub/Sub, one-to-many) = fanout e desacoplamento de microsserviços.
 - **Serverless e containers**: Lambda por evento · ECS/EKS orquestram containers via ECR · Fargate elimina gerenciamento de infra.
 - **Redes**: [[entities/amazon-vpc|VPC]] é o alicerce · sub-redes públicas (IGW) vs privadas · IGW para internet · VPN para data center · Direct Connect para alto desempenho · [[concepts/network-acl|NACL]] (stateless, sub-rede) + [[concepts/security-group|Security Group]] (stateful, instância) = defesa em profundidade.
+- **Segurança na nuvem**: [[concepts/shared-responsibility-model|Shared Responsibility]] (AWS cuida DA nuvem, cliente cuida NA nuvem) · [[entities/aws-kms|KMS]] para criptografia · [[entities/aws-organizations|Organizations]] para múltiplas contas + SCPs · [[entities/aws-artifact|Artifact]] para conformidade · [[entities/aws-waf|WAF]] contra SQL Injection/XSS · [[entities/aws-shield|Shield]] contra DDoS · [[entities/amazon-inspector|Inspector]] escaneia CVEs · [[entities/amazon-guardduty|GuardDuty]] detecta ameaças com ML.
 
 ---
 
@@ -103,7 +104,6 @@ Tudo serverless, mesma região, sem credenciais hardcodadas.
 
 ### Trilha CLF-C02
 - Well-Architected Framework.
-- Shared Responsibility Model.
 - Pricing & Support Plans.
 - Catálogo de serviços por categoria.
 
@@ -111,14 +111,16 @@ Tudo serverless, mesma região, sem credenciais hardcodadas.
 
 ## Lacunas do wiki
 
-- **IAM avançado**: Roles cross-account, federação, SCPs, AWS Organizations, KMS, CloudTrail, IAM Access Analyzer.
-- **S3**: Sem versionamento, criptografia, lifecycle, storage classes, presigned URLs, hospedagem estática.
+- **IAM avançado**: Roles cross-account, federação, CloudTrail, IAM Access Analyzer.
+- **S3**: Sem lifecycle, presigned URLs, hospedagem estática (storage classes e versionamento agora cobertos via CLF-C02).
 - **Lambda**: triggers detalhados, layers, cold starts, VPC, observabilidade.
 - **DynamoDB**: GSI/LSI, streams, transactions, capacity modes.
 - **API Gateway**: custom domain, CORS, throttling, validação.
 - **Cognito**: User Pool real, authorizer no API Gateway, Identity Pool, federação social.
 - **EC2**: tudo além da menção conceitual e do "acesso negado".
-- **CLF-C02**: tudo depois da aula 16.1 (Well-Architected, Shared Responsibility, billing, catálogo de serviços avançados). Redes avançadas: NAT Gateway, VPC Peering, PrivateLink.
+- **CLF-C02**: Well-Architected Framework, billing e Pricing & Support Plans.
+- Redes avançadas: NAT Gateway, VPC Peering, PrivateLink.
+- Segurança avançada: Secrets Manager, Security Hub, CloudTrail (página própria).
 - Tudo fora do tópico AWS — linguagens, frameworks, AI/ML, arquitetura clássica — ainda sem fontes.
 
 ---

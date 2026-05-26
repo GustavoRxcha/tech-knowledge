@@ -4,6 +4,9 @@ Registro append-only de atividade do wiki. Entradas mais recentes no topo.
 
 ---
 
+## [2026-05-26] ingest | CLF-C02 Aulas 1-6 — Segurança na Nuvem com AWS
+Fonte: `raw/clf-c02-seguranca-nuvem-aws-aulas-1-6-completo.md`. Criados: [[concepts/shared-responsibility-model]] (AWS: DA nuvem; Cliente: NA nuvem), [[entities/aws-kms]] (criptografia em repouso e em trânsito), [[entities/aws-organizations]] (multi-conta, SCP, faturamento consolidado), [[entities/aws-artifact]] (relatórios e contratos de conformidade), [[entities/aws-waf]] (firewall L7, SQL Injection, XSS), [[entities/aws-shield]] (DDoS Standard gratuito vs Advanced pago), [[entities/amazon-inspector]] (scan de CVEs em EC2), [[entities/amazon-guardduty]] (detecção de ameaças via ML), [[concepts/encryption]] (data at rest vs data in transit), [[concepts/scp]] (Service Control Policies). Atualizado: [[entities/aws-iam]] (perspectiva CLF-C02), [[topics/aws-security]] (expandido com novas sub-áreas), [[topics/cloud-fundamentals]] (18 sources), [[wiki/overview]], [[wiki/index]]. Total: 11 páginas criadas, 5 atualizadas.
+
 ## [2026-05-20] ingest | CLF-C02 Aula 16.1 — Network ACLs e Security Groups
 Fonte: `raw/clf-c02-aula16.1-network-acls-security-groups.md`. Criados: [[concepts/network-acl]] (stateless, sub-rede), [[concepts/security-group]] (stateful, instância). Par stateless/stateful documentado com fluxo completo de pacote.
 
